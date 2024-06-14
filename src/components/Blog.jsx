@@ -27,17 +27,24 @@ const Blog = ({ blog, updateLikes, user, deleteBlog }) => {
     <div className="blog">
       <div className="title">
         {blog.title} {blog.author}
-        <button onClick={() => setView(!view)}>{view ? "hide" : "view"}</button>
+        <button id="view" onClick={() => setView(!view)}>
+          {view ? "hide" : "view"}
+        </button>
       </div>
       {view && (
         <div className="otherFields">
           <p>{blog.url}</p>
           <p>
-            likes {blog.likes} <button onClick={handleLikes}>like</button>
+            likes {blog.likes}{" "}
+            <button id="like" onClick={handleLikes}>
+              like
+            </button>
           </p>
-          <p>{blog?.user?.username}</p>
-          {user?.username === blog?.user?.username && (
-            <button onClick={handleDelete}>remove</button>
+          <p>{blog.user.username}</p>
+          {user?.username === blog.user.username && (
+            <button id="remove" onClick={handleDelete}>
+              remove
+            </button>
           )}
         </div>
       )}

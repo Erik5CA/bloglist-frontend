@@ -24,6 +24,7 @@ const App = () => {
       const res = await getAll();
       const sorted = res.sort((a, b) => b.likes - a.likes);
       setBlogs(sorted);
+      console.log(sorted);
     };
     fetchBlogs();
   }, []);
@@ -31,9 +32,9 @@ const App = () => {
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem("loggedBlogappUser");
     if (loggedUserJSON) {
-      const user = JSON.parse(loggedUserJSON);
-      setUser(user);
-      setToken(user.token);
+      const userLog = JSON.parse(loggedUserJSON);
+      setUser(userLog);
+      setToken(userLog.token);
     }
   }, []);
 
@@ -45,7 +46,6 @@ const App = () => {
     try {
       blogFormRef.current.toggleVisibility();
       const blog = await create(newBlog);
-      console.log(blog);
       setBlogs([...blogs, blog]);
       setMessage(`a new blog ${blog.title} by ${blog.author} added`);
       setTimeout(() => {
@@ -66,7 +66,8 @@ const App = () => {
       const newBlogs = blogs.map((blog) =>
         blog.id !== blogUpdated.id ? blog : blogUpdated
       );
-      setBlogs(newBlogs);
+      const sorted = newBlogs.sort((a, b) => b.likes - a.likes);
+      setBlogs(sorted);
     } catch (exeption) {
       setError(exeption.response.data.error);
     }
@@ -95,7 +96,10 @@ const App = () => {
       {message && <p className="message">{message}</p>}
 
       <form>
-        {user.username} logged in <button onClick={handleLogout}>logout</button>
+        {user.username} logged in{" "}
+        <button id="logout" onClick={handleLogout}>
+          logout
+        </button>
       </form>
 
       {error && <p className="error">{error}</p>}
@@ -104,15 +108,17 @@ const App = () => {
         <FormCreateBlog createBlog={addBlog} />
       </Toggeable>
 
-      {blogs.map((blog) => (
-        <Blog
-          key={blog.id}
-          blog={blog}
-          updateLikes={update}
-          user={user}
-          deleteBlog={deleteB}
-        />
-      ))}
+      <div className="blogs">
+        {blogs.map((blog) => (
+          <Blog
+            key={blog.id}
+            blog={blog}
+            updateLikes={update}
+            user={user}
+            deleteBlog={deleteB}
+          />
+        ))}
+      </div>
     </div>
   );
 };

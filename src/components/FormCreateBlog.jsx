@@ -19,6 +19,7 @@ export const FormCreateBlog = ({ createBlog }) => {
 
       <label htmlFor="title">title</label>
       <input
+        id="title"
         type="text"
         name="title"
         placeholder="title"
@@ -29,6 +30,7 @@ export const FormCreateBlog = ({ createBlog }) => {
       <br />
       <label htmlFor="author">author</label>
       <input
+        id="author"
         type="text"
         name="author"
         placeholder="author"
@@ -39,6 +41,7 @@ export const FormCreateBlog = ({ createBlog }) => {
       <br />
       <label htmlFor="url">url</label>
       <input
+        id="url"
         type="text"
         name="url"
         placeholder="url"
@@ -47,7 +50,7 @@ export const FormCreateBlog = ({ createBlog }) => {
       />
 
       <br />
-      <button>create</button>
+      <button id="create">create</button>
     </form>
   );
 };

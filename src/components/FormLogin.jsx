@@ -29,6 +29,7 @@ export const FormLogin = ({ setUser, setError }) => {
     <form onSubmit={handleLogin}>
       <label htmlFor="username">username</label>
       <input
+        id="username"
         type="text"
         name="username"
         placeholder="username"
@@ -38,6 +39,7 @@ export const FormLogin = ({ setUser, setError }) => {
       <br />
       <label htmlFor="password">password</label>
       <input
+        id="password"
         type="password"
         name="password"
         placeholder="password"
@@ -46,7 +48,9 @@ export const FormLogin = ({ setUser, setError }) => {
       />
 
       <br />
-      <button type="submit">login</button>
+      <button id="login-button" type="submit">
+        login
+      </button>
     </form>
   );
 };
